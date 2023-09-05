@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 //componentes
-import LogHome from "./pages/LogHome";
-import QuemSomos from "./pages/QuemSomos";
-import CadastroUsuario from './pages/CadastroUsuario';
+import Header from './componentes/Header';
+import Log_Home from "./pages/Log_Home";
+import Quem_Somos from "./pages/Quem_Somos";
+import Cadastro_Usuario from './pages/Cadastro_Usuario';
+
 
 //estilização global
 import "./index.css";
@@ -19,9 +21,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     <BrowserRouter> {/*Indica que aplicação terá rotas*/}
     
       <Routes>{/*Indica uma lista de rotas*/}
-        <Route path='./pages/LogHome' element={<LogHome />} /> {/*Indica o caminho do componente e o nome da rota dele*/}
-        <Route path='./pages/QuemSomos' element={<QuemSomos />} />
-        <Route path='./pages/CadastroUsuario' element={<CadastroUsuario />} /> 
+      <Route path='./componentes/Header' element={<Header />} />
+        <Route path='./pages/Log_Home' element={<Log_Home />} /> {/*Indica o caminho do componente e o nome da rota dele*/}
+        <Route path='./pages/Quem_Somos' element={<Quem_Somos />} />
+        <Route path='./pages/Cadastro_Usuario' element={<Cadastro_Usuario />} /> 
               </Routes>
     </BrowserRouter>
   </React.StrictMode>
