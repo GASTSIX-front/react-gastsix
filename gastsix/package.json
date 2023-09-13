@@ -12,7 +12,14 @@
   "dependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+<<<<<<< HEAD
     "react-helmet-async": "^1.3.0",
+=======
+<<<<<<< HEAD
+=======
+    "react-helmet-async": "^1.3.0",
+>>>>>>> 284231d36ec8b727f38c37884b5f1ff4f44bc022
+>>>>>>> c0c2b03a267f5392b4aef00acd42b8ea76533a3b
     "react-router-dom": "^6.15.0"
   },
   "devDependencies": {
