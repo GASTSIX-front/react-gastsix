@@ -1,4 +1,6 @@
+
 import "./style.css";
+import IMG from "../../assets/img/LOGO.png"
 
 function Log_Home() {
 
@@ -7,10 +9,10 @@ function Log_Home() {
 
             <main>
                 <div className="big_logo">
-                    <img src="./img/LOGO.png" alt="logo gastsix" />
+                    <img src={IMG} alt="logo gastsix" />
                 </div>
                 <div className="box_login">
-                    <h2>login</h2>
+                    <h2>Login</h2>
                     <div className="preenchimentos">
                         <div className="usuario">
                             <label htmlFor="usuário">Usuário:</label>
@@ -30,5 +32,4 @@ function Log_Home() {
     );
 }
 
-//o componente Home pode ser chamado em outros arquivos
 export default Log_Home;
