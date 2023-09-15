@@ -2,10 +2,12 @@ import "./style.css"
 
 //Hook
 import { useState } from "react";
-const [codigo, setCodigo] = useState<string>("");
-const [ajustar, setAjustarQuantidade] = useState<string>("");
 
 function Tel_Ajuste() {
+
+  const [codigo, setCodigo] = useState<string>("");
+  const [ajustar, setAjustarQuantidade] = useState<string>("");
+
   return (
     <main className="banner">
       {/*indica o conteudo principal*/}
@@ -56,12 +58,12 @@ function Tel_Ajuste() {
             >
               Ajustar quantidade:
             </label>
-            <input 
-            type="text" 
-            name="input__ajustar quantidade" 
-            id=""
-            onChange={(e) => setAjustarQuantidade(e.target.value)}
-              required 
+            <input
+              type="text"
+              name="input__ajustar quantidade"
+              id=""
+              onChange={(e) => setAjustarQuantidade(e.target.value)}
+              required
             />
           </div>
           <button className="aj_botao" type="submit">
