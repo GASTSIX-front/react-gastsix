@@ -43,17 +43,29 @@ header {
 
 /*BANNER*/
 
-.banner {
+.vis_pedido {
     background-image: url(../../assets/img/background.png); 
     /* height: auto;  */
-     height: 944px; 
+    min-height: 944px; 
     background-size: cover;
-    justify-content: center;
+    /* justify-content: center; */
     display: flex;
     align-items: center;
     flex-direction: column;
+    padding-top: 100px;
 }
 
+.vis_pedido .filtro{
+    display: flex;
+    color: #ff7700;
+    width: 300px;
+    align-items: center;
+    margin-bottom: 50px;
+}
+.vis_pedido .filtro > input{
+    width: 30px;
+    margin-right: 10px;
+}
 
 /* SECAO FORMULARIO*/
 
@@ -142,7 +154,10 @@ header {
 
 /*Respansividade*/
 
-@media screen and (max-width: 768px) {
+@media screen and (min-width: 768px) and (max-width: 1024px){
+    .vis_pedido{
+        padding-top: 0;
+    }
     h1{
         font-size: 15px;
     }
@@ -174,6 +189,9 @@ header {
         width: 150%;
         margin: 20px;
     } 
+    .cartao__pedido{
+        margin-right: 7em;
+    }
 
     
 }

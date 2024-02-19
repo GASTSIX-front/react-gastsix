@@ -1,11 +1,203 @@
+//estilizacao
 import "./style.css"
-import PDF from "../../assets/issues/vis_pedidos.pdf"
-import { useEffect } from "react";
+
+//axios
+import api from "../../utils/api";
 
 //Hook
 import { useState } from "react";
+import { useEffect } from "react";
+
+
+//Componentes
+import CardPedido from "../../componentes/CardPedido";
+import CardProduto from "../../componentes/CardProduto";
 
 function Vis_Pedido() {
+  const [listaPedidos, setListaPedidos] = useState<any[]>([]);
+  const [listaProdutos, setListaProdutos] = useState<any[]>([]);
+  // const [DataFinal, setDataFinal] = useState<string>("");
+  // const [porpedidos, setPorPedido] = useState<string>("");
+
+  // function ListarPedidos() {
+  //   //consumo api - lista pedidos
+  //   api.get("pedido")
+  //     .then((response) => {
+  //       setListaPedidos(response.data)
+  //       console.log(response)
+  //     })
+  //     .catch((error) => console.log(error)
+  //     )
+  // }
+
+  async function CriarPedidos() {
+    if (localStorage.getItem("ListaPedidos") == null) {
+      var lista = [
+        {
+          "id_pedido": "061d105d-c6e1-11ee-9c08-b445067b803e",
+          "observacoes": "Pedido 1 Observações",
+          "usuario_supervisor": "002",
+          "setor": "A",
+          "itens_pedido": [
+            {
+              "id": "0618a348-c6e1-11ee-9c08-b445067b803e",
+              "produto": {
+                "id": "0618a348-c6e1-11ee-9c08-b445067b803e",
+                "descricao": "Produto A",
+                "partnumber": "123456",
+                "setor": "A",
+                "codigoSAP": "SAP123"
+              },
+              "quantidade_produto": 10,
+              "separado": false
+            },
+            {
+              "id": "061a4df9-c6e1-11ee-9c08-b445067b803e",
+              "produto": {
+                "id": "061a4df9-c6e1-11ee-9c08-b445067b803e",
+                "descricao": "Produto D",
+                "partnumber": "901234",
+                "setor": "A",
+                "codigoSAP": "SAP901"
+              },
+              "quantidade_produto": 50,
+              "separado": false
+            },
+            {
+              "id": "061b4a90-c6e1-11ee-9c08-b445067b803e",
+              "produto": {
+                "id": "061b4a90-c6e1-11ee-9c08-b445067b803e",
+                "descricao": "Produto G",
+                "partnumber": "890123",
+                "setor": "A",
+                "codigoSAP": "SAP890"
+              },
+              "quantidade_produto": 1,
+              "separado": false
+            },
+            {
+              "id": "061cb21a-c6e1-11ee-9c08-b445067b803e",
+              "produto": {
+                "id": "061cb21a-c6e1-11ee-9c08-b445067b803e",
+                "descricao": "Produto J",
+                "partnumber": "678901",
+                "setor": "A",
+                "codigoSAP": "SAP678"
+              },
+              "quantidade_produto": 100,
+              "separado": false
+            }
+          ],
+          "concluido": false
+        },
+        {
+          "id_pedido": "51470f02-cd05-11ee-a218-a4bb6d746e70",
+          "observacoes": "Pedido 2 Observações",
+          "usuario_supervisor": "002",
+          "setor": "B",
+          "itens_pedido": [
+            {
+              "id": "0619084a-c6e1-11ee-9c08-b445067b803e",
+              "produto": {
+                "id": "0619084a-c6e1-11ee-9c08-b445067b803e",
+                "descricao": "Produto B",
+                "partnumber": "789012",
+                "setor": "B",
+                "codigoSAP": "SAP789"
+              },
+              "quantidade_produto": 100,
+              "separado": false
+            },
+            {
+              "id": "061aaaa8-c6e1-11ee-9c08-b445067b803e",
+              "produto": {
+                "id": "061aaaa8-c6e1-11ee-9c08-b445067b803e",
+                "descricao": "Produto E",
+                "partnumber": "567890",
+                "setor": "B",
+                "codigoSAP": "SAP567"
+              },
+              "quantidade_produto": 5,
+              "separado": false
+            },
+            {
+              "id": "061bb8fb-c6e1-11ee-9c08-b445067b803e",
+              "produto": {
+                "id": "061bb8fb-c6e1-11ee-9c08-b445067b803e",
+                "descricao": "Produto H",
+                "partnumber": "456789",
+                "setor": "B",
+                "codigoSAP": "SAP456"
+              },
+              "quantidade_produto": 10,
+              "separado": false
+            }
+          ],
+          "concluido": false
+        },
+        {
+          "id_pedido": "5147c810-cd05-11ee-a218-a4bb6d746e70",
+          "observacoes": "Pedido 3 Observações",
+          "usuario_supervisor": "002",
+          "setor": "C",
+          "itens_pedido": [
+            {
+              "id": "0619b8ac-c6e1-11ee-9c08-b445067b803e",
+              "produto": {
+                "id": "0619b8ac-c6e1-11ee-9c08-b445067b803e",
+                "descricao": "Produto C",
+                "partnumber": "345678",
+                "setor": "C",
+                "codigoSAP": "SAP345"
+              },
+              "quantidade_produto": 20,
+              "separado": false
+            },
+            {
+              "id": "061af93d-c6e1-11ee-9c08-b445067b803e",
+              "produto": {
+                "id": "061af93d-c6e1-11ee-9c08-b445067b803e",
+                "descricao": "Produto F",
+                "partnumber": "234567",
+                "setor": "C",
+                "codigoSAP": "SAP234"
+              },
+              "quantidade_produto": 20,
+              "separado": false
+            },
+            {
+              "id": "061c560a-c6e1-11ee-9c08-b445067b803e",
+              "produto": {
+                "id": "061c560a-c6e1-11ee-9c08-b445067b803e",
+                "descricao": "Produto I",
+                "partnumber": "012345",
+                "setor": "C",
+                "codigoSAP": "SAP012"
+              },
+              "quantidade_produto": 5,
+              "separado": false
+            }
+          ],
+          "concluido": false
+        }
+      ]
+
+      await localStorage.setItem("ListaPedidos", JSON.stringify(lista))
+    }
+    await ListarPedidos();
+  }
+
+  // function ListarProdutos() {
+  //   api.get("produto")
+  //     .then((response) => {
+  //       setListaProdutos(response.data)
+  //       console.log(response);
+
+  //     })
+  //     .catch((error) => console.log(error)
+  //     )
+
+  // }
 
   function recolherMenu() {
 
@@ -38,68 +230,57 @@ function Vis_Pedido() {
   useEffect(() => {
     //executa uma ação após o componente ser recarregado
     recolherMenu();
+    CriarPedidos();
   }, [])
 
-  const [DataInicial, setDataInicial] = useState<string>("");
-  const [DataFinal, setDataFinal] = useState<string>("");
-  const [porpedidos, setPorPedido] = useState<string>("");
-  
+  function Filtrar(e: any) {
+    if (e.target.checked) {
+      setListaPedidos(JSON.parse(localStorage.getItem("ListaPedidos")!).filter((pedido: any) => !pedido.concluido))
+    }else{
+      ListarPedidos();
+    }
+  }
+
+  async function ListarPedidos() {
+    await setListaPedidos(JSON.parse(localStorage.getItem("ListaPedidos")!))
+  }
+
   return (
-    <main className="banner">
-      {/*indica o conteudo principal*/}
-      <section className="section_formulario">
-        {/*tag section indica uma secao*/}
-        <form className="formulario_central">
-          <div className="div_alinhamento_data_pedidos">
-            <div className="div_alinhamento_data">
-              <label htmlFor="input_data">Data Inicial:</label>
-              <input
-                type="date"
-                name="input_data"
-                id=""
-                onChange={(e) => setDataInicial(e.target.value)}
-                required
+    <main className="vis_pedido">
+      <div className="filtro">
+        <input onChange={(e) => Filtrar(e)} type="checkbox" name="filtro" id="filtro"/>
+        <label htmlFor="filtro">Visualizar Pedidos Aguardando</label>
+      </div>
+      <ul>
+        {
+          listaPedidos.map((pedido: any, index) => {
+
+            return <li key={index}>
+              <CardPedido
+                id={pedido.id_pedido}
+                observacoes={pedido.observacoes}
+                usuario_supervisor={pedido.usuario_supervisor}
+                setor={pedido.setor}
+                concluido={pedido.concluido}
               />
-            </div>
-            <div className="div_alinhamento_data">
-              <label htmlFor="input_data">Data Final:</label>
-              <input
-                type="date"
-                name="input_data"
-                id=""
-                onChange={(e) => setDataFinal(e.target.value)}
-                required
+            </li>
+
+          })
+        }
+      </ul>
+      <ul>
+        {
+          listaProdutos.map((produto: any, index) => {
+            return <li key={index}>
+              <CardProduto
+                id={produto.id}
+                item={produto.item}
               />
-            </div>
-            <div className="div_alinhamento_porpedidos">
-              <label htmlFor="input_porpedidos">Por pedido:</label>
-              <input
-                type="text"
-                name="input_porpedidos"
-                id=""
-                onChange={(e) => setPorPedido(e.target.value)}
-                required
-              />
-            </div>
-          </div>
-          <div className="div_pdf">
-            <iframe
-              src={PDF}
-              width={600}
-              height={600}
-              style={{ border: "none" }}
-            ></iframe>
-          </div>
-          <div className="div_alinhamento_botao">
-            <button className="botao_gerar" type="submit">
-              Gerar xml
-            </button>
-            <button className="botao_gerar" type="submit">
-              Gerar pdf
-            </button>
-          </div>
-        </form>
-      </section>
+            </li>
+          })
+        }
+      </ul>
+
 
     </main>
   )
